@@ -1,8 +1,6 @@
 package ru.mipt.java2016.homework.g596.kupriyanov.StreamAPI;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -36,12 +34,10 @@ public class StreamAPI {
 
     private static Map<String, Integer> streamAPICounter() throws IOException {
         Map<String, Integer> dict = Files.lines(Paths.get(path))
-                .flatMap(line -> Stream
-                        .of(line.split(pattern))
+                .flatMap(line -> Stream.of(line.split(pattern))
                         .filter(word -> word.length() > 0))
                 .map(String::toLowerCase)
-                .collect(Collectors
-                        .toMap(word -> word,
+                .collect(Collectors.toMap(word -> word,
                                 word -> 1,
                                 Integer::sum));
         return dict;
